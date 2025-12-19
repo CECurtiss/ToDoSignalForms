@@ -1,21 +1,27 @@
 import { Injectable, signal, computed } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Item } from '../models/item.model';
-import { Observable } from 'rxjs';
+import { ItemRepository } from '../repositories/item.repository';
 
 @Injectable({
   providedIn: 'root',
 })
-export class ItemService {
+export class ItemService extends ItemRepository {
   private apiUrl = 'http://localhost:5000/items';
-  constructor(private http: HttpClient) {}
+  // super initializes the parent abstract class even though a constructor is not used in the parent class. necessary for inheritance
+  constructor(private http: HttpClient) {
+    super();
+  }
 
-  // signal state to hold items
+  // signal state to hold items. You can mutate the state(signals value), you cannot reassign the variable. Protects reference, not data
   private readonly writableItems = signal<Item[]>([]);
   // signal state to communicate with UI if currently loading items
   private readonly loadingSignal = signal<boolean>(false);
 
-  // 
+  // query current items state, but can't modify them directly
+  items = this.writableItems.asReadonly();
+  // query loading state, but can't modify it directly
+  loading = this.loadingSignal.asReadonly();
     
   
   //  get items from backend
