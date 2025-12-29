@@ -39,7 +39,17 @@ export class ItemService extends ItemRepository {
       )
       .subscribe()
     }
-    
+  // update completed value in backend
+  updateCompleted(item: Item)  {
+    const url = `${this.apiUrl}/${item.id}/updateCompleted`;
+    const updatedItem = { ...item, completed: !item.completed}
+
+    this.writableItems.update(items =>
+      items.map(i => i.id === updatedItem.id ? updatedItem : i)
+    )
+    this.http.put(url, updatedItem).subscribe();
+  }
+        
   }
   // get items by Id
   // getItemById(id: number): Observable<Item> {
@@ -67,10 +77,3 @@ export class ItemService extends ItemRepository {
   //   return this.http.put<Item>(url, item);
   // }
 
-    // update completed value in backend
-  // updateCompleted(item: Item): Observable<Item> {
-  //   const url = `${this.apiUrl}/${item.id}/updateCompleted`;
-  //   console.log('Updating item with id:', item.id, 'Data:', item);
-  //   return this.http.put<Item>(url, item);
-  // }
-        

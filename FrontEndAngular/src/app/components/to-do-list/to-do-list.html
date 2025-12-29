@@ -14,8 +14,12 @@
       @for (item of items(); track $index) {
       <tr [ngStyle]="{ 'text-decoration': item.completed ? 'line-through' : 'none' }">
         <td>
-          <input class="form-check-input" type="checkbox" [checked]="item.completed" />
-          <!-- (change)="updateCompletedTask(item)" -->
+          <input
+            class="form-check-input"
+            type="checkbox"
+            [checked]="item.completed"
+            (change)="toggleCompletedTask(item)"
+          />
         </td>
 
         <th>{{ item.priority }}</th>

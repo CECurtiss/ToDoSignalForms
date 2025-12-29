@@ -5,6 +5,7 @@ import { CommonModule, DatePipe } from '@angular/common';
 import { RouterLink, RouterModule } from '@angular/router';
 import { FormsModule } from '@angular/forms';
 import { inject } from '@angular/core';
+import { Item } from '../../models/item.model';
 
 @Component({
   selector: 'app-to-do-list',
@@ -28,6 +29,10 @@ export class ToDoList implements OnInit {
     this.itemService.getItems();
   };
   
+  //   // Update completed boolean
+    toggleCompletedTask(item: Item): void {
+      this.itemService.updateCompleted(item)
+    }
 }
 //   // Delete Item
 //   deleteItem(id: number): void {
@@ -46,17 +51,3 @@ export class ToDoList implements OnInit {
 //     console.log('Delete cancelled for item with id:', id);
 //   }
 // }
-
-//   // Update completed boolean
-//   updateCompletedTask(item: Item): void {
-//     console.log('Updating item:', item);
-//     this.itemService.updateCompleted(item).subscribe({
-//       next: (updateCompleted) => {
-//         console.log('Item updated:', updateCompleted);
-//         this.cdr.detectChanges();
-//       },
-//       error: (err) => {
-//         console.error("Error updating item:", err);
-//       }
-//     });
-//   }
