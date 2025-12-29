@@ -31,9 +31,9 @@ export class UpdateTask implements OnInit {
   today: string = new Date().toISOString().split('T')[0];
 
   ngOnInit(): void {
-    this.id = Number(this.route.snapshot.paramMap.get('id'));
-    console.log("Retrieved Id", this.id);
-    this.retreiveItemById(this.id);
+    // this.id = Number(this.route.snapshot.paramMap.get('id'));
+    // console.log("Retrieved Id", this.id);
+    // this.retreiveItemById(this.id);
   }
 
 //   // get Item by Id

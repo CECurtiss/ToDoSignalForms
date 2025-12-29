@@ -9,9 +9,9 @@ export abstract class ItemRepository {
 
     // Action methods
     abstract getItems(): void;
-    abstract getItemById(id: number): Item | undefined;
-    abstract addItem(item: Item): void;
-    abstract deleteItemById(id: number): void;
-    abstract updateItem(item: Item): void;
-    abstract updateCompleted(item: Item): void;
+    // abstract getItemById(id: number): Item | undefined;
+    // abstract addItem(item: Item): void;
+    // abstract deleteItemById(id: number): void;
+    // abstract updateItem(item: Item): void;
+    // abstract updateCompleted(item: Item): void;
 }

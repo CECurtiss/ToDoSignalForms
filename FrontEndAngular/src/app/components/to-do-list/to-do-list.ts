@@ -1,38 +1,34 @@
-import { ChangeDetectionStrategy, ChangeDetectorRef, Component, OnInit} from '@angular/core';
+import { Component, OnInit} from '@angular/core';
 import { ItemService } from '../../services/item';
-import { Item } from '../../models/item.model';
+// import { Item } from '../../models/item.model';
 import { CommonModule, DatePipe } from '@angular/common';
 import { RouterLink, RouterModule } from '@angular/router';
 import { FormsModule } from '@angular/forms';
+import { inject } from '@angular/core';
 
 @Component({
   selector: 'app-to-do-list',
-  imports: [CommonModule, DatePipe,RouterLink, RouterModule,FormsModule],
-  // changeDetection: ChangeDetectionStrategy.Default,
+  standalone: true,
+  imports: 
+    [CommonModule, 
+      // DatePipe,
+      // RouterLink, 
+      RouterModule,
+      FormsModule],
   templateUrl: './to-do-list.html',
   styleUrl: './to-do-list.css',
 })
 export class ToDoList implements OnInit {
-  constructor(private itemService: ItemService,
-    // private cdr: ChangeDetectorRef
-  ) {};
+  private itemService = inject(ItemService);
 
-//   items: Item [] = [];
+  items = this.itemService.items
+  loading = this.itemService.loading
 
-//   getAllItems(): Item[] {
-//     this.itemService.getItems().subscribe((data) => {
-//       this.items = data;
-//       console.log(this.items);
-//       this.cdr.detectChanges();
-//       return this.items;
-//     }
-//     );
-//   }
-
-//   ngOnInit(): void {
-//     this.getAllItems();
-//   };
-
+  ngOnInit(): void {
+    this.itemService.getItems();
+  };
+  
+}
 //   // Delete Item
 //   deleteItem(id: number): void {
 //     if(window.confirm("Are you sure you want to delete this task?")) {
@@ -64,4 +60,3 @@ export class ToDoList implements OnInit {
 //       }
 //     });
 //   }
-// }

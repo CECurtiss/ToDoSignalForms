@@ -2,6 +2,7 @@ import { Injectable, signal, computed } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Item } from '../models/item.model';
 import { ItemRepository } from '../repositories/item.repository';
+import { tap } from 'rxjs/operators';
 
 @Injectable({
   providedIn: 'root',
@@ -25,10 +26,21 @@ export class ItemService extends ItemRepository {
     
   
   //  get items from backend
-  // getItems(): Observable<Item[]> {   
-  //   return this.http.get<Item[]>(this.apiUrl);
-  // }
-
+  getItems(): void {   
+    this.loadingSignal.set(true);
+    this.http.get<Item[]>(this.apiUrl)
+      .pipe(
+        tap(items => {
+          this.writableItems.set(items);
+          this.loadingSignal.set(false);
+          console.log(items)
+        }
+        )
+      )
+      .subscribe()
+    }
+    
+  }
   // get items by Id
   // getItemById(id: number): Observable<Item> {
   //   const url = `${this.apiUrl}/${id}`;
@@ -62,4 +74,3 @@ export class ItemService extends ItemRepository {
   //   return this.http.put<Item>(url, item);
   // }
         
-}

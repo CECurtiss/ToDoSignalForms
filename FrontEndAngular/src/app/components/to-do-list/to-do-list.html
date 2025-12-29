@@ -11,7 +11,7 @@
       </tr>
     </thead>
     <tbody>
-      @for (item of items; track $index) {
+      <!-- @for (item of items; track $index) {
       <tr [ngStyle]="{ 'text-decoration': item.completed ? 'line-through' : 'none' }">
         <td>
           <input
@@ -20,7 +20,6 @@
             [(ngModel)]="item.completed"
             (ngModelChange)="updateCompletedTask(item)"
           />
-          <!-- add a confirm for moving a completed task to completed tasks list and add date completed -->
         </td>
 
         <th>{{ item.priority }}</th>
@@ -33,7 +32,7 @@
           <button (click)="deleteItem(item.id)" class="btn btn-danger btn-sm m-1">Delete</button>
         </td>
       </tr>
-      }
+      } -->
     </tbody>
   </table>
 </div>
